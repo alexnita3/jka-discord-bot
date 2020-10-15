@@ -80,11 +80,10 @@ sudo apt get install node
 
 1. Create a Discord Bot by following [their own documentation](https://discord.com/developers/docs/intro)
 2. Modify the main file (discordBotJka.js) to add the following parameters:
-
-token - the secret token of your bot (Taken from the Discord Developer Portal)
-server1IP - The IP of the server
-server1Port - The port that the server is running on
-channelName - The ID of the channel that you want the bot to post to (YOu can get this by turning on developer mode in your discord setting and right-clicking the channel)
+    * token - the secret token of your bot (Taken from the Discord Developer Portal)
+    * server1IP - The IP of the server
+    * server1Port - The port that the server is running on
+    * channelName - The ID of the channel that you want the bot to post to (YOu can get this by turning on developer mode in your discord setting and right-clicking the channel)
 
 
 3. Add the bot to your server
@@ -96,22 +95,19 @@ You might need 'Manage Server' Permissions so beware.
 node discordBotJka.js
 ```
 
+5. (Optional) Upload to heroku and run the dyno that is included in the procfile
 
 
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
-
+Use this on a dicord server to access data about current players on a JKA server. There is more than just what's being displayed there, so feel free to take a look at the logs (It will log the whole retrieved object)
 
 
 <!-- ROADMAP -->
 ## Roadmap
 
-See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a list of proposed features (and known issues).
-
+See the [open issues](https://github.com/alexnita3/jka-discord-bot/issues) for a list of proposed features (and known issues).
 
 
 <!-- CONTRIBUTING -->
@@ -126,11 +122,10 @@ Contributions are what make the open source community such an amazing place to b
 5. Open a Pull Request
 
 
-
 <!-- LICENSE -->
 ## License
 
-Distributed under the MIT License. See `LICENSE` for more information.
+Distributed under the GPL-3.0 License. See `LICENSE` for more information.
 
 
 
@@ -139,26 +134,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
 
-Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
-
-
-
-<!-- ACKNOWLEDGEMENTS -->
-## Acknowledgements
-* [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
-* [Img Shields](https://shields.io)
-* [Choose an Open Source License](https://choosealicense.com)
-* [GitHub Pages](https://pages.github.com)
-* [Animate.css](https://daneden.github.io/animate.css)
-* [Loaders.css](https://connoratherton.com/loaders)
-* [Slick Carousel](https://kenwheeler.github.io/slick)
-* [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll)
-* [Sticky Kit](http://leafo.net/sticky-kit)
-* [JVectorMap](http://jvectormap.com)
-* [Font Awesome](https://fontawesome.com)
-
-
-
+Project Link: [https://github.com/alexnita3/jka-discord-bot](https://github.com/alexnita3/jka-discord-bot)
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
