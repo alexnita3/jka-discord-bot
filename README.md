@@ -9,10 +9,6 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/alexnita3/jka-discord-bot">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
-  </a>
-
   <h3 align="center">Discord Jedi Knight Academy Bot</h3>
 
   <p align="center">
@@ -132,18 +128,16 @@ Distributed under the GPL-3.0 License. See `LICENSE` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
-
 Project Link: [https://github.com/alexnita3/jka-discord-bot](https://github.com/alexnita3/jka-discord-bot)
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=flat-square
-[contributors-url]: https://github.com/othneildrew/Best-README-Template/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=flat-square
-[forks-url]: https://github.com/othneildrew/Best-README-Template/network/members
-[stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=flat-square
+[contributors-shield]: https://img.shields.io/github/contributors/alexnita3/jka-discord-bot.svg?style=flat-square
+[contributors-url]: https://github.com/alexnita3/jka-discord-bot/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/alexnita3/jka-discord-bot.svg?style=flat-square
+[forks-url]: https://github.com/alexnita3/jka-discord-bot/network/members
+[stars-shield]: https://img.shields.io/github/stars/alexnita3/jka-discord-bot.svg?style=flat-square
 [stars-url]: https://github.com/othneildrew/Best-README-Template/stargazers
 [issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=flat-square
 [issues-url]: https://github.com/othneildrew/Best-README-Template/issues
