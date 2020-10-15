@@ -62,31 +62,38 @@ This was started from my own need of being able to quickly see who is online in 
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+This can be run locally, as well as hosted on a remote server. My recommendation is to use Heroku as it is free and easy-to-use.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
+You need to have installed the following:
 * npm
 ```sh
 npm install npm@latest -g
 ```
+* Node
+```sh
+sudo apt get install node
+```
 
 ### Installation
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+1. Create a Discord Bot by following [their own documentation](https://discord.com/developers/docs/intro)
+2. Modify the main file (discordBotJka.js) to add the following parameters:
+
+token - the secret token of your bot (Taken from the Discord Developer Portal)
+server1IP - The IP of the server
+server1Port - The port that the server is running on
+channelName - The ID of the channel that you want the bot to post to (YOu can get this by turning on developer mode in your discord setting and right-clicking the channel)
+
+
+3. Add the bot to your server
+
+You might need 'Manage Server' Permissions so beware.
+
+4. Open a terminal window inside the cloned repository folder and run the following command
 ```sh
-git clone https://github.com/your_username_/Project-Name.git
-```
-3. Install NPM packages
-```sh
-npm install
-```
-4. Enter your API in `config.js`
-```JS
-const API_KEY = 'ENTER YOUR API';
+node discordBotJka.js
 ```
 
 
