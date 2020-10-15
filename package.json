@@ -1,0 +1,18 @@
+{
+  "name": "discord-bot-jka",
+  "version": "1.0.0",
+  "description": "Queries jka servers and posts result in discord",
+  "main": "discordBotJka.js",
+  "dependencies": {
+    "discord.js": "^11.6.1",
+    "gamedig": "^2.0.23",
+    "n": "^6.7.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node discordBotJka.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Alexa Mary Nita",
+  "license": "MIT"
+}
