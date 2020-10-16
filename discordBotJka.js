@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const token = '*insert bot token*';
+const token = 'NzY2MzkzMzM0OTQ4MTY3NzEx.X4itaQ.VEmqeYxMz5pYd1XN5jjwWrswWKY';
 const Gamedig = require('gamedig');
 
 const client = new Discord.Client();
@@ -7,16 +7,57 @@ const client = new Discord.Client();
 //this can support a (theoretically) unlimited number of servers.
 //just make sure you cann queryServer for each one.
 
-const server1IP = '*insert server IP';
-const server1Port = '*insert server port*';
-const channelName = '*insert channel ID*';
+const server1IP = '198.50.210.67';
+const server1Port = '29070';
+const channelName = '671453734919995427';
+const adminPassword = 'password';
+//this is the default date, which can be changed
+var currentByYear = new Date("2020-10-05");
 
 client.on('message', (msg) => {
     if(msg == '!players'){
         console.log('Message recived!');
         queryServer(server1IP, server1Port, channelName, 'Server Name', msg, 15844367);
     }
+    if(msg == '!date'){
+        var now = new Date();
+        var yearsSince = now.getFullYear() - currentByYear.getFullYear();
+        yearsSince = yearsSince.toString();
+        var formattedMonth = addTrailingZeroes(now.getMonth());
+        var formattedHour = addTrailingZeroes(now.getHours());
+        var formattedMinute = addTrailingZeroes(now.getMinutes());
+        var formattedSecond = addTrailingZeroes(now.getSeconds());
+
+        var starWarsDate = yearsSince + '.' + formattedMonth + 'ABY - ' + formattedHour + formattedMinute + '/' + formattedSecond;
+
+        channel = client.channels.get(channelName);
+        channel.send(starWarsDate);
+        msg.delete();
+    }
+    if(msg.content.includes('!setDate ' + adminPassword)){
+        helperString = '!setDate ' + adminPassword + " ";
+        date = msg.content.replace(helperString, '');
+
+        let re = /^((\d{2}(([02468][048])|([13579][26]))[\-\/\s]?((((0?[13578])|(1[02]))[\-\/\s]?((0?[1-9])|([1-2][0-9])|(3[01])))|(((0?[469])|(11))[\-\/\s]?((0?[1-9])|([1-2][0-9])|(30)))|(0?2[\-\/\s]?((0?[1-9])|([1-2][0-9])))))|(\d{2}(([02468][1235679])|([13579][01345789]))[\-\/\s]?((((0?[13578])|(1[02]))[\-\/\s]?((0?[1-9])|([1-2][0-9])|(3[01])))|(((0?[469])|(11))[\-\/\s]?((0?[1-9])|([1-2][0-9])|(30)))|(0?2[\-\/\s]?((0?[1-9])|(1[0-9])|(2[0-8]))))))(\s(((0?[1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$/;
+
+        channel = client.channels.get(channelName);
+        if(re.test(date) == true){
+            currentByYear = new Date(date);
+            channel.send("New BY date is: " + currentByYear);
+        }else{
+            channel.send("Date has to be in the Following Format: YYYY/MM/DD . PLease try again.");
+        }
+        msg.delete();
+    }
 })
+
+function addTrailingZeroes(number){
+    if(number < 10){
+        var result = '0' + number.toString();
+        return result;
+    }
+    return number.toString();
+}
 
 function queryServer(IP, port, channelID, serverName, msg, embedColour){
     console.log('Querying server...');
