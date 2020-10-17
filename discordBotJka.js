@@ -1,22 +1,84 @@
 const Discord = require('discord.js');
-const token = '*insert bot token*';
+const token = '*token*';
 const Gamedig = require('gamedig');
 
 const client = new Discord.Client();
 
 //this can support a (theoretically) unlimited number of servers.
-//just make sure you cann queryServer for each one.
+//just make sure you call queryServer for each one.
 
-const server1IP = '*insert server IP';
-const server1Port = '*insert server port*';
-const channelName = '*insert channel ID*';
+const server1IP = '198.50.210.67';
+const server1Port = '29070';
+const channelName = '671453734919995427';
+const adminPassword = 'password';
+//this is the default date, which can be changed
+var currentByYear = new Date("2020-10-05");
 
 client.on('message', (msg) => {
     if(msg == '!players'){
         console.log('Message recived!');
         queryServer(server1IP, server1Port, channelName, 'Server Name', msg, 15844367);
     }
+    if(msg == '!date'){
+        console.log('Date command received!');
+
+        var starWarsDate = formatSwDate();
+
+        channel = client.channels.get(channelName);
+        channel.send(starWarsDate);
+        msg.delete();
+    }
+    if(msg.content.includes('!setDate ' + adminPassword)){
+
+        console.log('Set date command received!');
+        
+        var [isValid, date] = isDateValid(msg.content);
+
+        channel = client.channels.get(channelName);
+        if(isValid){
+            currentByYear = new Date(date);
+            channel.send("New BY date is: " + currentByYear);
+        }else{
+            channel.send("Date has to be in the Following Format: YYYY-MM-DD . Please try again.");
+        }
+        msg.delete();
+    }
 })
+
+function isDateValid(message){
+    toBeStripped = '!setDate ' + adminPassword + " ";
+    date = message.replace(toBeStripped, '');
+
+    let re = /^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/;
+
+    if(re.test(date) == true){
+        return [true, date];
+    }else{
+        return [false, date];
+    }
+}
+
+function formatSwDate(){
+    var now = new Date();
+    var yearsSince = now.getFullYear() - currentByYear.getFullYear();
+    var formattedYear = yearsSince.toString();
+    var formattedMonth = addTrailingZeroes(now.getMonth());
+    var formattedHour = addTrailingZeroes(now.getHours());
+    var formattedMinute = addTrailingZeroes(now.getMinutes());
+    var formattedSecond = addTrailingZeroes(now.getSeconds());
+
+    var starWarsDate = formattedYear + '.' + formattedMonth + 'ABY - ' + formattedHour + formattedMinute + '/' + formattedSecond;
+
+    return starWarsDate;
+}
+
+function addTrailingZeroes(number){
+    if(number < 10){
+        var result = '0' + number.toString();
+        return result;
+    }
+    return number.toString();
+}
 
 function queryServer(IP, port, channelID, serverName, msg, embedColour){
     console.log('Querying server...');
