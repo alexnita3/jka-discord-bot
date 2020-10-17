@@ -1,0 +1,15 @@
+{
+    "token": "*insert bot token here*",
+    "server1IP": "*insert server ip here*",
+    "server1Port": "*insert server port here*",
+    "channelName": "*inser channel ID here*",
+    "adminPassword": "*insert secret password here*",
+    "currentByYear": "*insert battle of Yavin date here in format YYYY-MM-DD*",
+    "server1Name": "*insert server name here*",
+    "server1URL": "*insert forum/server url here here*",
+    "commands": {
+        "getPlayersCommand": "!players",
+        "getStarWarsDateCommand": "!date",
+        "setStarWarsDateCommand": "!setdate"
+    }
+}
