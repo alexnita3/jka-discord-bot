@@ -1,0 +1,15 @@
+{
+    "token": "*h*",
+    "server1IP": "198.50.210.67",
+    "server1Port": "29070",
+    "channelName": "671453734919995427",
+    "adminPassword": "password",
+    "currentByYear": "1987-10-05",
+    "server1Name": "AwesomeServerName",
+    "server1URL": "https://imperiumjkarp.enjin.com/",
+    "commands": {
+        "getPlayersCommand": "!players",
+        "getStarWarsDateCommand": "!date",
+        "setStarWarsDateCommand": "!setdate"
+    }
+}
