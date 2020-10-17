@@ -4,6 +4,7 @@
   "description": "Queries jka servers and posts result in discord",
   "main": "discordBotJka.js",
   "dependencies": {
+    "config": "^3.3.2",
     "discord.js": "^11.6.1",
     "gamedig": "^2.0.23",
     "n": "^6.7.0"

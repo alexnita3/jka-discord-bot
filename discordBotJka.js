@@ -1,24 +1,92 @@
 const Discord = require('discord.js');
-const token = '*insert bot token*';
+const config = require('config');
 const Gamedig = require('gamedig');
 
 const client = new Discord.Client();
 
 //this can support a (theoretically) unlimited number of servers.
-//just make sure you cann queryServer for each one.
+//just make sure you call queryServer for each one.
 
-const server1IP = '*insert server IP';
-const server1Port = '*insert server port*';
-const channelName = '*insert channel ID*';
+const token = config.get('token');
+const server1IP = config.get('server1IP');
+const server1Port = config.get('server1Port');
+const channelName = config.get('channelName');
+const adminPassword = config.get('adminPassword');
+const server1Name = config.get('server1Name');
+const server1URL = config.get('server1URL')
+
+
+//this is the default date, which can be changed
+var currentByYear = new Date(config.get('currentByYear'));
 
 client.on('message', (msg) => {
-    if(msg == '!players'){
+    if(msg == config.get('commands.getPlayersCommand')){
         console.log('Message recived!');
-        queryServer(server1IP, server1Port, channelName, 'Server Name', msg, 15844367);
+        queryServer(server1IP, server1Port, channelName, server1Name, msg, 15844367, server1URL);
+    }
+    if(msg == config.get('commands.getStarWarsDateCommand')){
+        console.log('Date command received!');
+
+        var starWarsDate = formatSwDate();
+
+        channel = client.channels.get(channelName);
+        channel.send(starWarsDate);
+        msg.delete();
+    }
+    if(msg.content.includes(config.get('commands.setStarWarsDateCommand') + " " + adminPassword)){
+
+        console.log('Set date command received!');
+        
+        var [isValid, date] = isDateValid(msg.content);
+
+        channel = client.channels.get(channelName);
+        console.log(isValid);
+        if(isValid){
+            currentByYear = new Date(date);
+            channel.send("New BY date is: " + currentByYear);
+        }else{
+            channel.send("Date has to be in the Following Format: YYYY-MM-DD . Please try again.");
+        }
+        msg.delete();
     }
 })
 
-function queryServer(IP, port, channelID, serverName, msg, embedColour){
+function isDateValid(message){
+    toBeStripped = config.get('commands.setStarWarsDateCommand') + " " + adminPassword + " ";
+    date = message.replace(toBeStripped, '');
+
+    let re = /^\d{4}\-\d{1,2}\-\d{1,2}$/;
+
+    if(re.test(date) == true){
+        return [true, date];
+    }else{
+        return [false, date];
+    }
+}
+
+function formatSwDate(){
+    var now = new Date();
+    var yearsSince = now.getFullYear() - currentByYear.getFullYear();
+    var formattedYear = yearsSince.toString();
+    var formattedMonth = addTrailingZeroes(now.getMonth());
+    var formattedHour = addTrailingZeroes(now.getHours());
+    var formattedMinute = addTrailingZeroes(now.getMinutes());
+    var formattedSecond = addTrailingZeroes(now.getSeconds());
+
+    var starWarsDate = formattedYear + '.' + formattedMonth + 'ABY - ' + formattedHour + formattedMinute + '/' + formattedSecond;
+
+    return starWarsDate;
+}
+
+function addTrailingZeroes(number){
+    if(number < 10){
+        var result = '0' + number.toString();
+        return result;
+    }
+    return number.toString();
+}
+
+function queryServer(IP, port, channelID, serverName, msg, embedColour, serverURL){
     console.log('Querying server...');
     Gamedig.query({
         type: 'swjk',
@@ -44,7 +112,7 @@ function queryServer(IP, port, channelID, serverName, msg, embedColour){
         const embed = new Discord.RichEmbed()
                         .setTitle('Players on ' + serverName + ':')
                         .setColor(embedColour)
-                        .setURL('https://imperiumjkarp.enjin.com/')
+                        .setURL(serverURL)
                         .addField(playerNumber + '/32 players online', playerList, true)
                         .addField('Map: ', state.map)
                         .setFooter("Developed by: Alexa Mary Nita. \nhttps://github.com/alexnita3/jka-discord-bot");
