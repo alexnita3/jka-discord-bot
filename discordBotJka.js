@@ -1,11 +1,11 @@
 const Discord = require('discord.js');
-const token = 'NzY2MzkzMzM0OTQ4MTY3NzEx.X4itaQ.VEmqeYxMz5pYd1XN5jjwWrswWKY';
+const token = '*token here*';
 const Gamedig = require('gamedig');
 
 const client = new Discord.Client();
 
 //this can support a (theoretically) unlimited number of servers.
-//just make sure you cann queryServer for each one.
+//just make sure you call queryServer for each one.
 
 const server1IP = '198.50.210.67';
 const server1Port = '29070';
@@ -20,36 +20,53 @@ client.on('message', (msg) => {
         queryServer(server1IP, server1Port, channelName, 'Server Name', msg, 15844367);
     }
     if(msg == '!date'){
-        var now = new Date();
-        var yearsSince = now.getFullYear() - currentByYear.getFullYear();
-        yearsSince = yearsSince.toString();
-        var formattedMonth = addTrailingZeroes(now.getMonth());
-        var formattedHour = addTrailingZeroes(now.getHours());
-        var formattedMinute = addTrailingZeroes(now.getMinutes());
-        var formattedSecond = addTrailingZeroes(now.getSeconds());
-
-        var starWarsDate = yearsSince + '.' + formattedMonth + 'ABY - ' + formattedHour + formattedMinute + '/' + formattedSecond;
+        var starWarsDate = formatSwDate();
 
         channel = client.channels.get(channelName);
         channel.send(starWarsDate);
         msg.delete();
     }
     if(msg.content.includes('!setDate ' + adminPassword)){
-        helperString = '!setDate ' + adminPassword + " ";
-        date = msg.content.replace(helperString, '');
-
-        let re = /^((\d{2}(([02468][048])|([13579][26]))[\-\/\s]?((((0?[13578])|(1[02]))[\-\/\s]?((0?[1-9])|([1-2][0-9])|(3[01])))|(((0?[469])|(11))[\-\/\s]?((0?[1-9])|([1-2][0-9])|(30)))|(0?2[\-\/\s]?((0?[1-9])|([1-2][0-9])))))|(\d{2}(([02468][1235679])|([13579][01345789]))[\-\/\s]?((((0?[13578])|(1[02]))[\-\/\s]?((0?[1-9])|([1-2][0-9])|(3[01])))|(((0?[469])|(11))[\-\/\s]?((0?[1-9])|([1-2][0-9])|(30)))|(0?2[\-\/\s]?((0?[1-9])|(1[0-9])|(2[0-8]))))))(\s(((0?[1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$/;
+        
+        var [isValid, date] = isDateValid(msg.content);
 
         channel = client.channels.get(channelName);
-        if(re.test(date) == true){
+        if(isValid){
             currentByYear = new Date(date);
             channel.send("New BY date is: " + currentByYear);
         }else{
-            channel.send("Date has to be in the Following Format: YYYY/MM/DD . PLease try again.");
+            channel.send("Date has to be in the Following Format: YYYY/MM/DD . Please try again.");
         }
         msg.delete();
     }
 })
+
+function isDateValid(message){
+    toBeStripped = '!setDate ' + adminPassword + " ";
+    date = message.replace(toBeStripped, '');
+
+    let re = /^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/;
+
+    if(re.test(date) == true){
+        return [true, date];
+    }else{
+        return [false, date];
+    }
+}
+
+function formatSwDate(){
+    var now = new Date();
+    var yearsSince = now.getFullYear() - currentByYear.getFullYear();
+    var formattedYear = yearsSince.toString();
+    var formattedMonth = addTrailingZeroes(now.getMonth());
+    var formattedHour = addTrailingZeroes(now.getHours());
+    var formattedMinute = addTrailingZeroes(now.getMinutes());
+    var formattedSecond = addTrailingZeroes(now.getSeconds());
+
+    var starWarsDate = formattedYear + '.' + formattedMonth + 'ABY - ' + formattedHour + formattedMinute + '/' + formattedSecond;
+
+    return starWarsDate;
+}
 
 function addTrailingZeroes(number){
     if(number < 10){
