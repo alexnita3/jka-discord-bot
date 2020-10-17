@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const token = '*token here*';
+const token = '*token*';
 const Gamedig = require('gamedig');
 
 const client = new Discord.Client();
@@ -20,6 +20,8 @@ client.on('message', (msg) => {
         queryServer(server1IP, server1Port, channelName, 'Server Name', msg, 15844367);
     }
     if(msg == '!date'){
+        console.log('Date command received!');
+
         var starWarsDate = formatSwDate();
 
         channel = client.channels.get(channelName);
@@ -27,6 +29,8 @@ client.on('message', (msg) => {
         msg.delete();
     }
     if(msg.content.includes('!setDate ' + adminPassword)){
+
+        console.log('Set date command received!');
         
         var [isValid, date] = isDateValid(msg.content);
 
@@ -35,7 +39,7 @@ client.on('message', (msg) => {
             currentByYear = new Date(date);
             channel.send("New BY date is: " + currentByYear);
         }else{
-            channel.send("Date has to be in the Following Format: YYYY/MM/DD . Please try again.");
+            channel.send("Date has to be in the Following Format: YYYY-MM-DD . Please try again.");
         }
         msg.delete();
     }
