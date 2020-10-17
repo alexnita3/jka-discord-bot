@@ -73,16 +73,12 @@ sudo apt get install node
 ### Installation
 
 1. Create a Discord Bot by following [their own documentation](https://discord.com/developers/docs/intro)
-2. Modify the main file (discordBotJka.js) to add the following parameters:
-    * token - the secret token of your bot (Taken from the Discord Developer Portal)
-    * server1IP - The IP of the server
-    * server1Port - The port that the server is running on
-    * channelName - The ID of the channel that you want the bot to post to (YOu can get this by turning on developer mode in your discord setting and right-clicking the channel)
 
+2. Modify the config file (config/config.json) to suit the server you wish tracked. (All of them have to be filled in)
 
 3. Add the bot to your server
 
-You might need 'Manage Server' Permissions so beware.
+  * You might need 'Manage Server' Permissions so beware.
 
 4. Open a terminal window inside the cloned repository folder and run the following command
 ```sh
